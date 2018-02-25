@@ -3,11 +3,11 @@ package ru.javawebinar.topjava.util;
 import ru.javawebinar.topjava.model.UserMeal;
 import ru.javawebinar.topjava.model.UserMealWithExceed;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.Month;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 /**
  * GKislin
@@ -28,8 +28,31 @@ public class UserMealsUtil {
 //        .toLocalTime();
     }
 
-    public static List<UserMealWithExceed>  getFilteredWithExceeded(List<UserMeal> mealList, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
-        // TODO return filtered list with correctly exceeded field
-        return null;
+    public static List<UserMealWithExceed>  getFilteredWithExceeded(List<UserMeal> mealList, LocalTime startTime,
+                                                                    LocalTime endTime, int caloriesPerDay) {
+
+        if (mealList == null || startTime == null || endTime == null)
+            return new ArrayList<>();
+
+        Map<LocalDate, Integer> userMealMapPerDay = new HashMap<>();
+        List<UserMealWithExceed> userMealWithExceedList = new ArrayList<>();
+
+        for (UserMeal userMeal: mealList) {
+            userMealMapPerDay.put(userMeal.getDateTime().toLocalDate(), userMeal.getCalories() +
+                    userMealMapPerDay.getOrDefault(userMeal.getDateTime().toLocalDate(), 0));
+        }
+
+        for (UserMeal userMeal: mealList) {
+            if (TimeUtil.isBetween(userMeal.getDateTime().toLocalTime(), startTime, endTime))
+                userMealWithExceedList.add(
+                        new UserMealWithExceed(
+                                userMeal.getDateTime(),
+                                userMeal.getDescription(),
+                                userMeal.getCalories(),
+                                userMealMapPerDay.get(userMeal.getDateTime().toLocalDate()) > caloriesPerDay
+                        )
+                );
+        }
+        return userMealWithExceedList;
     }
 }
