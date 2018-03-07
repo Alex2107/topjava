@@ -30,6 +30,10 @@
                 <td><ctg:format value="${meal.getDateTime()}" pattern="dd/MM/yyyy HH:mm:ss"/></td>
                 <td>${meal.getDescription()}</td>
                 <td>${meal.getCalories()}</td>
+
+                <td>${meal.description}</td>
+                <td>${meal.calories}</td>
+                <td>${meal.exceed}</td>
             </tr>
         </c:forEach>
     </table>
