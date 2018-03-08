@@ -37,6 +37,7 @@ public class MealServlet extends HttpServlet {
         log.debug("start of ListMeal");
         //List<MealWithExceed> list = MealsUtil.getFilteredWithExceeded(mealDAO.getMeals(), LocalTime.MIN, LocalTime.MAX, 2000);
         //log.debug(list.toString());
+        //System.out.println(list.get(1).getCalories());
         request.setAttribute("meals", MealsUtil.getFilteredWithExceeded(mealDAO.getMeals(), LocalTime.MIN, LocalTime.MAX, 2000));
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/meals.jsp");
         dispatcher.forward(request, response);

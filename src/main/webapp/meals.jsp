@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%--
   Created by IntelliJ IDEA.
   User: Alex
@@ -18,22 +19,15 @@
     <table class="tg">
         <tr>
             <th width="80">DateTime</th>
-            <th width="80">DateTime formatted</th>
             <th width="120">Description</th>
             <th width="60">Calories</th>
         </tr>
-        <!--
-        public MealWithExceed(LocalDateTime dateTime, String description, int calories, boolean exceed)!-->
+
         <c:forEach items="${meals}" var="meal">
             <tr>
-                <td>${meal.getDate()}</td>
-                <td><ctg:format value="${meal.getDateTime()}" pattern="dd/MM/yyyy HH:mm:ss"/></td>
-                <td>${meal.getDescription()}</td>
-                <td>${meal.getCalories()}</td>
-
-                <td>${meal.description}</td>
-                <td>${meal.calories}</td>
-                <td>${meal.exceed}</td>
+                <th style="${meal.isExceed() ? 'background-color: green':'background-color: red'}">${meal.getDateTime()}</th>
+                <th style="${meal.isExceed() ? 'background-color: green':'background-color: red'}">${meal.getDescription()}</th>
+                <th style="${meal.isExceed() ? 'background-color: green':'background-color: red'}">${meal.getCalories()}</th>
             </tr>
         </c:forEach>
     </table>
