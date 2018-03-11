@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://sargue.net/jsptags/time" prefix="javatime" %>
 <%--
   Created by IntelliJ IDEA.
   User: Alex
@@ -25,7 +26,7 @@
 
         <c:forEach items="${meals}" var="meal">
             <tr>
-                <th style="${meal.isExceed() ? 'background-color: green':'background-color: red'}">${meal.getDateTime()}</th>
+                <th style="${meal.isExceed() ? 'background-color: green':'background-color: red'}"><javatime:format value="${meal.getDateTime()}" pattern="dd/MM/yyyy HH:mm:ss" /></th>
                 <th style="${meal.isExceed() ? 'background-color: green':'background-color: red'}">${meal.getDescription()}</th>
                 <th style="${meal.isExceed() ? 'background-color: green':'background-color: red'}">${meal.getCalories()}</th>
             </tr>

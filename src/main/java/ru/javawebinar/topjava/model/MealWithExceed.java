@@ -9,6 +9,9 @@ public class MealWithExceed {
         return dateTime;
     }
 
+    public String getDateTimeStr() {
+        return dateTime.toString();
+    }
     public String getDescription() {
         return description;
     }
